@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form) }}
+
+    <button type="submit">Register score</button>
+    {{ form_end(form) }}
+
+    <ul>
+
+    {% for bet in bets %}
+        <li>
+            {{ bet.userName }} -
+            {{ bet.gameName }} -
+            {{ bet.leftScore }} -
+            {{ bet.rightScore }} -
+            <form method="post" action="/winner">
+                <input type="hidden" value="{{ bet.id }}" name="id">
+                <button type="submit">Winner</button>
+            </form>
+        </li>
+
+    {% endfor %}
+
+    </ul>
+        {{ form_start(reportForm) }}
+        {{ form_errors(reportForm) }}
+
+        {{ form_row(reportForm) }}
+
+        <button type="submit">Results</button>
+    {{ form_end(reportForm) }}
+{% endblock %}
