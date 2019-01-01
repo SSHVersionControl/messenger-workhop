@@ -12,10 +12,12 @@ framework:
 
         transports:
             # Uncomment the following line to enable a transport named "amqp"
-             amqp: '%env(MESSENGER_TRANSPORT_DSN)%'
+            http: '%env(MESSENGER_HTTP_DSN)%'
+            amqp: '%env(MESSENGER_TRANSPORT_DSN)%'
+            amqp2: '%env(MESSENGER_TRANSPORT_DSN)%'
 
         routing:
             # Route your messages to the transports
 #             'App\Message\ReportGame': amqp
-             'App\Message\LoserBet' : amqp
+             'App\Message\LoserBet' : http
              'App\Message\WinnerBet' : amqp

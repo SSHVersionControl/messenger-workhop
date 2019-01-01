@@ -107,6 +107,11 @@
       <path value="$PROJECT_DIR$/app/vendor/symfony/intl" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/security-bundle" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/swiftmailer-bundle" />
+      <path value="$PROJECT_DIR$/app/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/app/vendor/guzzle/common" />
+      <path value="$PROJECT_DIR$/app/vendor/guzzle/parser" />
+      <path value="$PROJECT_DIR$/app/vendor/guzzle/http" />
+      <path value="$PROJECT_DIR$/app/vendor/guzzle/stream" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

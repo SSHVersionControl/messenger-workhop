@@ -83,6 +83,18 @@
     "fig/link-util": {
         "version": "1.0.x-dev"
     },
+    "guzzle/common": {
+        "version": "v3.9.2"
+    },
+    "guzzle/http": {
+        "version": "v3.9.2"
+    },
+    "guzzle/parser": {
+        "version": "v3.9.2"
+    },
+    "guzzle/stream": {
+        "version": "v3.9.2"
+    },
     "jdorn/sql-formatter": {
         "version": "1.3.x-dev"
     },
@@ -118,6 +130,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.x-dev"
+    },
+    "ramsey/uuid": {
+        "version": "4.x-dev"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",

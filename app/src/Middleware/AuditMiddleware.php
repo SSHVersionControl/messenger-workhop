@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface;
@@ -15,24 +16,28 @@ class AuditMiddleware implements MiddlewareInterface
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {
         $message = $envelope->getMessage();
-        $id = spl_object_id($message);
 
-        echo "[$id] Handling: " . \get_class($message) . " <br/>\n";
+        $uuidStamp = $envelope->last(UuidStamp::class);
+        if (null === $uuidStamp) {
+            $uuidStamp = new UuidStamp((string)Uuid::uuid4());
+            $envelope = $envelope->with($uuidStamp);
+        }
 
         if (null !== $envelope->last(ReceivedStamp::class)) {
-            echo "[$id] Received Message: " . \get_class($message) . " <br/>\n";
+            echo "[$uuidStamp)] Received Message: " . \get_class($message) . " <br/>\n";
+
             return $stack->next()->handle($envelope, $stack);
         }
+
+        echo "[$uuidStamp] Handling: " . \get_class($message) . " <br/>\n";
 
         $returnedEnvelope = $stack->next()->handle($envelope, $stack);
 
         if (null === $returnedEnvelope->last(SentStamp::class)) {
-            echo "[$id] Message handle sync: " . \get_class($message) . " <br/>\n";
+            echo "[$uuidStamp] Message handle sync: " . \get_class($message) . " <br/>\n";
         } else {
-            echo "[$id] Dispatched Message sent to rabbit mq: " . \get_class($message) . " <br/>\n";
+            echo "[$uuidStamp] Dispatched Message sent to rabbit mq: " . \get_class($message) . " <br/>\n";
         }
-
-
 
         return $returnedEnvelope;
     }
